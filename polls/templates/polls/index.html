@@ -1,12 +1,29 @@
-{% load static %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links App</title>
 
-{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+</head>
+<body>
+    
+    {% load static %}
 
-<h1>Holaaa </h1>
-<form action="{% url 'polls:createLink' %}" method="post">
-{% csrf_token %}
-<input type="text" name="username" id="username">
-<input type="submit" value="Vote">
+    <link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <h1 class="text-primary">Holaaa </h1>
+    <form action="{% url 'polls:createLink' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="username" id="username">
+    <input type="submit" value="Vote">
 </form>
+{% bootstrap_javascript jquery='full' %}
+</body>
+</html>
+
