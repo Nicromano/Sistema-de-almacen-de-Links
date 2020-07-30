@@ -9,7 +9,10 @@ from django.urls import path
 
 from  . import views
 
-
+app_name = 'polls'
 urlpatterns = [
     path('', views.index, name='index'),
+    path('createLink/', views.createLink, name="createLink"),
+    path('editLink/<int:link_id>', views.editLink),
+    path('dashboard/', views.viewLinks),
 ]
