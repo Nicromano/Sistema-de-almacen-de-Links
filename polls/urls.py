@@ -12,8 +12,10 @@ from . import views
 app_name = 'polls'
 urlpatterns = [
     path('', views.index, name='index'),
-    path('createLink/', views.createLink, name="createLink"),
+    path('createLink/', views.createLinkPage, name="createLink"),
+    path('saveLink/', views.saveLink, name="saveLink"),
     path('editLink/<int:link_id>', views.editLink),
+    path('deleteLink/<int:link_id>', views.deleteLink),
     path('dashboard/', views.dashboard, name="dashboard"),
     path('login/', views.login, name="login"),
     path('logout/', views.logout, name="logout"),

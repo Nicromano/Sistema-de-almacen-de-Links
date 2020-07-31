@@ -1,8 +1,7 @@
 {% extends 'polls/index.html' %}
 
 {% block content %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}">
+    
     <div class="container ">
         <div class="row align-items-center">
             <div class="col">
@@ -11,7 +10,7 @@
                         <div class="text-center mb-4">
                             {% load static %}
                             <img src="{% static "img/avatar.svg" %}" alt="Avatar" width="100">
-                            <h5 class="card-title">Bienvenidos</h5>
+                            <h5 class="card-title t">Bienvenidos</h5>
                         </div>
                         <form action="{% url 'polls:login' %}" method="post">
                             {% csrf_token %}

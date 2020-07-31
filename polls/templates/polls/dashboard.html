@@ -1,16 +1,34 @@
 {% extends 'polls/index.html' %}
-
-
 {% block user %} {{username}} {% endblock %}
 {% block content %}
+
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/sidebard.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/sildebar.css' %}">
 <div class="container">
     <div class="row">
         {% if links %}
-        <div class="col-md-3">
-            {% comment %} Tarjeta {% endcomment %}
+        {% for link in links %}
+        <div class="col-md-4 mx-auto">
+            <div class="card m-5 p-2 shadow">
+
+                <div class="card-body">
+                    <div class="p-2">
+                        <h4 class="card-title text-center mb-2">{{link.name}}</h4>
+                    </div>
+                    <h6 class="card-subtitle mb-2 text-muted">{{link.url}}</h6>
+                    <p class="card-text"> <strong>Descripción: </strong> {{link.desciption}} </p>
+                    <div class="buttons">
+                        <a href="/deleteLink/{{link.id}}">
+                            <button class="btn btn-block  mb-2 btn-outline-danger">Eliminar</button>
+                        </a>
+                        <a href="/editLink/{{link.id}}">
+                            <button  class="btn btn-block   btn-success">Editar</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
+        {% endfor %}
         {% else %}
         <div class="col-md-5 mx-auto mt-5">
             <div class="text-center">
@@ -18,20 +36,13 @@
                 <div class="img m-2">
                     <img src="{% static "img/broken-link.svg" %}" alt="Avatar" width="150">
                 </div>
-
                 <h3>Aún no existen Links agregados </h3>
                 <a href="/createLink">
-                    <button class="btn  btn-primary m-2" >Agregar link</button>
+                    <button class="btn  btn-primary m-2">Agregar link</button>
                 </a>
-                
             </div>
         </div>
         {% endif%}
-
     </div>
 </div>
-
-
-
-
 {% endblock %}

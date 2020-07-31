@@ -1,6 +1,59 @@
 {% extends 'polls/index.html' %}
-
+{% block user %} {{username}} {% endblock %}
 {% block content %}
- <h1> create link </h1>
+ <div class="container ">
+        <div class="row align-items-center">
+            <div class="col">
+                <div class="card m-5 p-1 shadow  mx-auto " style="width: 20rem;">
+                    <div class="card-body">
+                        <div class="text-center mb-4">
+                            {% load static %}
+                            <img src="{% static "img/broken-link.svg" %}" alt="Avatar" width="75">
+                            <h5 class="card-title t">Agregar link</h5>
+                        </div>
+                        <form action="{% url 'polls:saveLink' %}" method="post">
+                            {% csrf_token %}
+                            <label for="username">Nombre: </label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        {% load static %}
+                                        <img src="{% static "img/tag.svg" %}" alt="Avatar" width="20px" >
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control"  name="nombre"
+                                    id="username" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+                            <label for="http">URL: </label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon2">
+                                        {% load static %}
+                                        <img src="{% static "img/link1.svg" %}" alt="Avatar" width="20px" >
+                                    </span>
+                                  
+                                    
+                                </div>
+                                <input type="text" class="form-control" name="http"
+                                    id="http" aria-label="http" aria-describedby="basic-addon2">
+                            </div>
+                            <label for="desciption">Descripción: </label>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">
+                                        {% load static %}
+                                        <img src="{% static "img/description.svg" %}" alt="Avatar" width="20px" >
+                                    </span>
+                                </div>
+                                <textarea name="description" id="desciption" cols="30" rows="2" aria-describedby="basic-addon3" class="form-control"> </textarea>
+                            
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
 
 {% endblock %}

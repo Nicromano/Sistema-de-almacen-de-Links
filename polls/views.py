@@ -36,10 +36,22 @@ def login(request):
 
 
 
-def createLink(request):
+def createLinkPage(request):
+    return  render(request, 'polls/createLink.html', {'username': User.objects.get(pk= request.session['user']) })
     
-    return  render(request, 'polls/createLink.html')
+
+def saveLink(request):
     
+    try:
+        link = Link(user=User.objects.get(pk=request.session['user']), name=request.POST['nombre'], url=request.POST['http'], desciption=request.POST['description'])
+        link.save()
+        request.session['message'] = 'success'
+    except:
+        request.session['message'] = 'error'
+
+
+
+    return redirect('/dashboard')
 
 def dashboard(request):
     try:
@@ -57,3 +69,9 @@ def dashboard(request):
 
 def editLink(request, link_id):
     return HttpResponse('editar link')
+
+def deleteLink(request, link_id):
+    link = Link.objects.get(pk=link_id)
+    link.delete()
+
+    return redirect('/dashboard')
