@@ -1,33 +1,10 @@
 {% extends 'polls/index.html' %}
 
-{% block content %}
 
+{% block user %} {{username}} {% endblock %}
+{% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/sidebard.css' %}">
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary  shadow">
-    <a class="navbar-brand" href="#">Links App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Agregar links <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#"> {{username}} <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-light my-2 my-sm-0">Cerrar sesión </button>
-        </div>
-    </div>
-</nav>
-
 <div class="container">
     <div class="row">
         {% if links %}
@@ -46,6 +23,7 @@
                 <a href="/createLink">
                     <button class="btn  btn-primary m-2" >Agregar link</button>
                 </a>
+                
             </div>
         </div>
         {% endif%}
