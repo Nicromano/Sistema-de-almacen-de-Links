@@ -13,7 +13,7 @@
                             <img src="{% static "img/avatar.svg" %}" alt="Avatar" width="100">
                             <h5 class="card-title">Bienvenidos</h5>
                         </div>
-                        <form action="{% url 'polls:addUser' %}" method="post">
+                        <form action="{% url 'polls:login' %}" method="post">
                             {% csrf_token %}
                             <div class="input-group mb-3">
                                 <div class="input-group-prepend">
