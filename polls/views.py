@@ -49,8 +49,6 @@ def saveLink(request):
     except:
         request.session['message'] = 'error'
 
-
-
     return redirect('/dashboard')
 
 def dashboard(request):
@@ -61,17 +59,55 @@ def dashboard(request):
     #Consultar los datos del usuario 
     username = User.objects.get(pk=user_session)
     links = Link.objects.filter(user_id=user_session)
-
-    context = {'username': username, 'links': links}
-    print(username, links)
+    try:
+        message = request.session['message']
+        del request.session['message']
+    except:
+        message = None
+    context = {'username': username, 'links': links, 'message': message}
     return render(request, 'polls/dashboard.html', context)
     
 
-def editLink(request, link_id):
-    return HttpResponse('editar link')
+def editLink(request):
+    try:
+        request.session['user']
+        id_link = request.session['id_link']
+    except :
+        return redirect('/')
+    del request.session['id_link']
+    #try:
+    link = Link.objects.get(pk=id_link)
+    link.name = request.POST['name']
+    link.url = request.POST['http']
+    link.desciption = request.POST['description']
+    link.save()
+    request.session['message'] = 'success'
+    #except Exception:   
+        #request.session['message'] = 'error'
+
+    return redirect('/dashboard')
+
+def editLinkPage(request, link_id):
+    try:
+        request.session['user']
+    except :
+        return redirect('/')
+
+    links = Link.objects.get(pk=link_id)
+    request.session['id_link'] = link_id
+    link = {'name': links.name, 'url': links.url, 'desciption': links.desciption}
+    return render(request, 'polls/editLink.html', {'link': link})
 
 def deleteLink(request, link_id):
-    link = Link.objects.get(pk=link_id)
-    link.delete()
+    try:
+        request.session['user']
+    except :
+        return redirect('/')
+    try:
+        link = Link.objects.get(pk=link_id)
+        link.delete()
+        request.session['message'] = 'success'
+    except :
+        request.session['message'] = None
 
     return redirect('/dashboard')

@@ -5,6 +5,26 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'styles/sildebar.css' %}">
 <div class="container">
+
+    {% if message%}
+    <div class="m-2">
+        {% if message == 'success'%}
+        <div class="alert alert-success" role="alert">
+            Acción realizada exitosamente
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        {%else%}
+        <div class="alert alert-danger" role="alert">
+            Hubo un problema la ralizar la acción
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        {%endif%}
+    </div>
+    {%endif%}
     <div class="row">
         {% if links %}
         {% for link in links %}
@@ -22,7 +42,7 @@
                             <button class="btn btn-block  mb-2 btn-outline-danger">Eliminar</button>
                         </a>
                         <a href="/editLink/{{link.id}}">
-                            <button  class="btn btn-block   btn-success">Editar</button>
+                            <button class="btn btn-block   btn-success">Editar</button>
                         </a>
                     </div>
                 </div>
