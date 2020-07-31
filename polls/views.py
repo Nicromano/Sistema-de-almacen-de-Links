@@ -37,8 +37,8 @@ def login(request):
 
 
 def createLink(request):
-    username = request.POST['username']
-    return  render(request, 'polls/dashborad')
+    
+    return  render(request, 'polls/createLink.html')
     
 
 def dashboard(request):
@@ -48,8 +48,11 @@ def dashboard(request):
         return redirect('/')
     #Consultar los datos del usuario 
     username = User.objects.get(pk=user_session)
-    print(username)
-    return render(request, 'polls/dashboard.html')
+    links = Link.objects.filter(user_id=user_session)
+
+    context = {'username': username, 'links': links}
+    print(username, links)
+    return render(request, 'polls/dashboard.html', context)
     
 
 def editLink(request, link_id):

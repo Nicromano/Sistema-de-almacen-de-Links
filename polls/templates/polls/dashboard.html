@@ -1,6 +1,5 @@
 {% extends 'polls/index.html' %}
 
-
 {% block content %}
 
 {% load static %}
@@ -20,9 +19,9 @@
         </ul>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">User <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#"> {{username}} <span class="sr-only">(current)</span></a>
             </li>
-        </ul>        
+        </ul>
         <div class="form-inline my-2 my-lg-0">
             <button class="btn btn-outline-light my-2 my-sm-0">Cerrar sesión </button>
         </div>
@@ -31,9 +30,26 @@
 
 <div class="container">
     <div class="row">
+        {% if links %}
         <div class="col-md-3">
-
+            {% comment %} Tarjeta {% endcomment %}
         </div>
+        {% else %}
+        <div class="col-md-5 mx-auto mt-5">
+            <div class="text-center">
+                {% load static %}
+                <div class="img m-2">
+                    <img src="{% static "img/broken-link.svg" %}" alt="Avatar" width="150">
+                </div>
+
+                <h3>Aún no existen Links agregados </h3>
+                <a href="/createLink">
+                    <button class="btn  btn-primary m-2" >Agregar link</button>
+                </a>
+            </div>
+        </div>
+        {% endif%}
+
     </div>
 </div>
 
