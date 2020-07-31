@@ -14,5 +14,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('createLink/', views.createLink, name="createLink"),
     path('editLink/<int:link_id>', views.editLink),
-    path('dashboard/', views.viewLinks),
+    path('dashboard/<int:user_id>', views.dashboard, name="dashboard"),
+    path('addUser/', views.addUser, name="addUser"),
 ]

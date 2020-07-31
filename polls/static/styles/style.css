@@ -1,0 +1,21 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #fafafa;
+    font-family: "Roboto", sans-serif;
+}
+
+/*body::after{
+    background-image: url("../img/link.svg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right bottom;
+    background-size: 350px;
+    opacity: 0.4;
+
+}*/
+.card-title {
+    font-family: "Pacifico", cursive;
+    font-size: 30px;
+}
+
