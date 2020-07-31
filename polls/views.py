@@ -18,6 +18,7 @@ def index(request):
 def logout(request):
     del request.session['user']
     return redirect('/')
+
 def login(request):
     username_post = request.POST['username']
     id = User.objects.filter(username = username_post).values_list('id', flat=True)
@@ -31,9 +32,8 @@ def login(request):
 
     request.session['user'] = id
     print(request.session['user'])
-    #return HttpResponseRedirect(reverse('polls:dashboard', args=(id,)))
     return redirect('/dashboard')
-#
+
 
 
 def createLink(request):
@@ -42,8 +42,15 @@ def createLink(request):
     
 
 def dashboard(request):
+    try:
+        user_session = request.session['user']
+    except :
+        return redirect('/')
+    #Consultar los datos del usuario 
+    username = User.objects.get(pk=user_session)
+    print(username)
+    return render(request, 'polls/dashboard.html')
     
-    return HttpResponse(request.session['user'])
 
 def editLink(request, link_id):
     return HttpResponse('editar link')
