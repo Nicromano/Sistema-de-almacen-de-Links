@@ -2,8 +2,6 @@
 {% block user %} {{username}} {% endblock %}
 {% block content %}
 
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'styles/sildebar.css' %}">
 <div class="container">
 
     {% if message%}
@@ -13,18 +11,19 @@
             Acción realizada exitosamente
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-              </button>
+            </button>
         </div>
         {%else%}
         <div class="alert alert-danger" role="alert">
             Hubo un problema la ralizar la acción
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
-              </button>
+            </button>
         </div>
         {%endif%}
     </div>
     {%endif%}
+
     <div class="row">
         {% if links %}
         {% for link in links %}
@@ -38,12 +37,34 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{link.url}}</h6>
                     <p class="card-text"> <strong>Descripción: </strong> {{link.desciption}} </p>
                     <div class="buttons">
-                        <a href="/deleteLink/{{link.id}}">
-                            <button class="btn btn-block  mb-2 btn-outline-danger">Eliminar</button>
-                        </a>
+                        <button type="button" class="btn btn-block  mb-2 btn-outline-danger" data-toggle="modal"
+                            data-target="#eliminar{{link.id}}">
+                            Eliminar
+                        </button>
+                        <div class="modal fade" id="eliminar{{link.id}}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar este link?</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <a href="/deleteLink/{{link.id}}">
+                                            <button type="button" class="btn btn-primary">Si, eliminar</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <a href="/editLink/{{link.id}}">
-                            <button class="btn btn-block   btn-success">Editar</button>
+                            <button class="btn btn-block btn-success">Editar</button>
                         </a>
+
                     </div>
                 </div>
             </div>

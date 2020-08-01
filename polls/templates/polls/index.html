@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,42 +10,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
 </head>
+
 <body>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}">
     {% if username%}
-        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary  shadow">
-    <a class="navbar-brand" href="/">Links App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary  shadow">
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/createLink">Agregar links <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#"> {% block user %}Username{% endblock %} <span class="sr-only">(current)</span></a>
-            </li>
-        </ul>
-        <div class="form-inline my-2 my-lg-0">
-            <a href="/logout">
-            <button class="btn btn-outline-light my-2 my-sm-0">Cerrar sesión </button>
-            </a>
+        <a class="navbar-brand" href="/">Links App</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/createLink">Agregar links <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto pr-5">
+                <li class="nav-item active">
+                {% load static %}
+                <a class="nav-link" href="#"> <img src="{% static "img/user.svg" %}" alt="Avatar" width="30">{% block user %}Username{% endblock %} <span
+                        class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-light my-2 my-sm-0" data-toggle="modal"
+                    data-target="#cerrarSesion">
+                    Cerrar sesión
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="cerrarSesion" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">¿Está seguro que desea cerrar sesión?
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                <a href="/logout">
+                                    <button type="button" class="btn btn-primary">Si, cerrar sesión</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
     {%endif%}
     {% block content %}
     {% endblock %}
 
     {% bootstrap_javascript jquery='full' %}
     {% load static  %}
-    <script src= "{% static 'js/alert.js' %}"> </script>
+    <script src="{% static 'js/alert.js' %}"> </script>
 </body>
 
 </html>
